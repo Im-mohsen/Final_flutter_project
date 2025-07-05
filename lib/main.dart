@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'pages/products_page.dart';
+import 'pages/cart_page.dart';
+import 'pages/admin_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,26 +15,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'فروشگاه دمو',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
+        fontFamily: 'Vazir',  // بعدا فونت رو اضافه کن
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'صفحه اصلی'),
+      builder: (context, child) {
+        return Directionality(
+          textDirection: TextDirection.rtl,
+          child: child!,
+        );
+      },
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('fa', ''),
+      ],
     );
   }
 }
@@ -113,10 +118,46 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () async {
+          final selected = await showMenu<String>(
+            context: context,
+            position: const RelativeRect.fromLTRB(1000, 600, 10, 0),
+            items: [
+              const PopupMenuItem<String>(
+                value: 'products',
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('محصولات', textDirection: TextDirection.rtl),
+                ),
+              ),
+              const PopupMenuItem<String>(
+                value: 'cart',
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('سبد خرید', textDirection: TextDirection.rtl),
+                ),
+              ),
+              const PopupMenuItem<String>(
+                value: 'admin',
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('پنل ادمین', textDirection: TextDirection.rtl),
+                ),
+              ),
+            ],
+          );
+
+          if (selected == 'products') {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const ProductsPage()));
+          } else if (selected == 'cart') {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const CartPage()));
+          } else if (selected == 'admin') {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminPage()));
+          }
+        },
+        tooltip: 'منو',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
