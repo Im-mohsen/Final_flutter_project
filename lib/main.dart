@@ -5,6 +5,7 @@ import 'pages/cart_page.dart';
 import 'pages/admin_page.dart';
 import 'pages/profile.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -115,6 +116,51 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
+  void _showNotificationsBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.5,
+          minChildSize: 0.3,
+          maxChildSize: 0.9,
+          builder: (context, scrollController) {
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: ListView(
+                controller: scrollController,
+                children: const [
+                  Text(
+                    '🔔 اعلانات شما',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.right,
+                  ),
+                  SizedBox(height: 12),
+                  ListTile(
+                    leading: Icon(Icons.notification_important),
+                    title: Text('پیام ۱: تخفیف ویژه'),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.notification_important),
+                    title: Text('پیام ۲: ارسال رایگان برای خرید بالای ۵۰۰ هزار تومان'),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.notification_important),
+                    title: Text('پیام ۳: محصول جدید اضافه شد'),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
   void _showSearchBottomSheet() {
     showModalBottomSheet(
       context: context,
@@ -177,6 +223,11 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: _showSearchBottomSheet,
             icon: const Icon(Icons.search),
             tooltip: 'جستجو',
+          ),
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            tooltip: 'اعلانات',
+            onPressed: _showNotificationsBottomSheet,
           ),
           IconButton(
             onPressed: _showCartBottomSheet,
