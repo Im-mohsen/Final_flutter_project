@@ -6,6 +6,7 @@ import 'pages/admin_page.dart';
 import 'pages/profile.dart';
 import 'pages/aboutus.dart';
 import 'pages/contactus.dart';
+import 'login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -296,6 +297,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('درباره ما', textDirection: TextDirection.rtl),
                 ),
               ),
+              const PopupMenuItem<String>(
+                value: 'login',
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('ورود', textDirection: TextDirection.rtl),
+                ),
+              ),
             ],
           );
 
@@ -311,8 +319,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const ContactusPage()));
           } else if (selected == 'aboutus') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutusPage()));
+          } else if (selected == 'login') {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
           }
-          
+
         },
         tooltip: 'منو',
         child: const Icon(Icons.menu),
