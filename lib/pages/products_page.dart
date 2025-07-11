@@ -6,7 +6,7 @@ class ProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('صفحه محصولات')),
+      appBar: AppBar(title: const Text('محصولات')),
       body: const Center(child: Text('لیست محصولات اینجاست')),
     );
   }

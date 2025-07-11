@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'صفحه اصلی'),
+      home: const MyHomePage(title: 'فروشگاه اینترنتی'),
       builder: (context, child) {
         return Directionality(
           textDirection: TextDirection.rtl,
@@ -61,6 +61,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  final GlobalKey _fabKey = GlobalKey();
+  
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -118,10 +120,20 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: _fabKey,
         onPressed: () async {
+          final RenderBox renderBox = _fabKey.currentContext!.findRenderObject() as RenderBox;
+          final Size size = renderBox.size;
+          final Offset offset = renderBox.localToGlobal(Offset.zero);
+
           final selected = await showMenu<String>(
             context: context,
-            position: const RelativeRect.fromLTRB(1000, 600, 10, 0),
+            position: RelativeRect.fromLTRB(
+              offset.dx,
+              offset.dy,
+              MediaQuery.of(context).size.width - offset.dx - size.width,
+              0,
+            ),
             items: [
               const PopupMenuItem<String>(
                 value: 'products',
@@ -156,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
           }
         },
         tooltip: 'منو',
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.menu),
       ),
     );
   }
