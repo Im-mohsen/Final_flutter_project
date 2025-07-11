@@ -114,7 +114,51 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
-
+  void _showSearchBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(16, 24, 16, 32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text(
+                '🔎 جستجو',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.right,
+                decoration: InputDecoration(
+                  hintText: 'نام محصول را وارد کنید...',
+                  hintTextDirection: TextDirection.rtl,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  prefixIcon: const Icon(Icons.search),
+                ),
+                onChanged: (value) {
+                  print('در حال جستجو: $value');
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -128,14 +172,16 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         backgroundColor: const Color.fromARGB(255, 244, 3, 99),
         actions: [
-          TextButton.icon(
+          IconButton(
+            onPressed: _showSearchBottomSheet,
+            icon: const Icon(Icons.search),
+            tooltip: 'جستجو',
+          ),
+          IconButton(
             onPressed: _showCartBottomSheet,
-            icon: const Icon(Icons.shopping_cart, color: Color.fromARGB(255, 0, 0, 0)),
-            label: const Text(
-              'سبد خرید',
-              style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-            ),
-          )
+            icon: const Icon(Icons.shopping_cart),
+            tooltip: 'سبد خرید',
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
