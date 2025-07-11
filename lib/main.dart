@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'فروشگاه دمو',
       theme: ThemeData(
-        fontFamily: 'Vazir',  // بعدا فونت رو اضافه کن
+        fontFamily: 'Vazir',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -73,6 +73,47 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+  void _showCartBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.5,
+          minChildSize: 0.3,
+          maxChildSize: 0.9,
+          builder: (context, scrollController) {
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: ListView(
+                controller: scrollController,
+                children: const [
+                  Text(
+                    '🛒 سبد خرید شما',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.right,
+                  ),
+                  SizedBox(height: 12),
+                  ListTile(
+                    title: Text('محصول ۱'),
+                    trailing: Text('۱ عدد'),
+                  ),
+                  ListTile(
+                    title: Text('محصول ۲'),
+                    trailing: Text('۲ عدد'),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,43 +125,22 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+        backgroundColor: const Color.fromARGB(255, 244, 3, 99),
+        actions: [
+          TextButton.icon(
+            onPressed: _showCartBottomSheet,
+            icon: const Icon(Icons.shopping_cart, color: Color.fromARGB(255, 0, 0, 0)),
+            label: const Text(
+              'سبد خرید',
+              style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
             ),
-          ],
-        ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         key: _fabKey,
+        backgroundColor: const Color.fromARGB(255, 244, 3, 99),
         onPressed: () async {
           final RenderBox renderBox = _fabKey.currentContext!.findRenderObject() as RenderBox;
           final Size size = renderBox.size;
