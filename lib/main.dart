@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'pages/products_page.dart';
 import 'pages/cart_page.dart';
 import 'pages/admin_page.dart';
+import 'pages/profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -222,6 +223,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('پنل ادمین', textDirection: TextDirection.rtl),
                 ),
               ),
+              const PopupMenuItem<String>(
+                value: 'profile',
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('پروفایل', textDirection: TextDirection.rtl),
+                ),
+              ),
             ],
           );
 
@@ -231,6 +239,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const CartPage()));
           } else if (selected == 'admin') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminPage()));
+          }
+          else if (selected == 'profile') {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfilePage()));
           }
         },
         tooltip: 'منو',

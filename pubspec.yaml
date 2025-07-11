@@ -71,7 +71,7 @@ flutter:
         - asset: assets/fonts/Vazirmatn-ExtraBold.ttf
         - asset: assets/fonts/Vazirmatn-ExtraLight.ttf
         - asset: assets/fonts/Vazirmatn-SemiBold.ttf
-        
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
