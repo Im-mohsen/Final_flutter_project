@@ -258,13 +258,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             items: [
               const PopupMenuItem<String>(
-                value: 'products',
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text('محصولات', textDirection: TextDirection.rtl),
-                ),
-              ),
-              const PopupMenuItem<String>(
                 value: 'cart',
                 child: Align(
                   alignment: Alignment.centerRight,
@@ -313,19 +306,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('دسته بندی', textDirection: TextDirection.rtl),
                 ),
               ),
-              const PopupMenuItem<String>(
-                value: 'product_details',
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text('جزئیات محصول', textDirection: TextDirection.rtl),
-                ),
-              ),
             ],
           );
 
-          if (selected == 'products') {
-            Navigator.push(context, MaterialPageRoute(builder: (_) => const ProductsPage()));
-          } else if (selected == 'cart') {
+          if (selected == 'cart') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const CartPage()));
           } else if (selected == 'admin') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminPage()));
@@ -339,8 +323,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
           } else if (selected == 'categories') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const CategoriesPage()));
-          } else if (selected == 'product_details') {
-            Navigator.push(context, MaterialPageRoute(builder: (_) => const ProductDetailsPage()));
           }
 
         },
