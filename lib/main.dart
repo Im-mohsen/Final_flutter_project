@@ -8,6 +8,7 @@ import 'pages/aboutus.dart';
 import 'pages/contactus.dart';
 import 'login.dart';
 import 'pages/categories.dart';
+import 'pages/product_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -312,6 +313,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('دسته بندی', textDirection: TextDirection.rtl),
                 ),
               ),
+              const PopupMenuItem<String>(
+                value: 'product_details',
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('جزئیات محصول', textDirection: TextDirection.rtl),
+                ),
+              ),
             ],
           );
 
@@ -331,6 +339,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
           } else if (selected == 'categories') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const CategoriesPage()));
+          } else if (selected == 'product_details') {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const ProductDetailsPage()));
           }
 
         },
