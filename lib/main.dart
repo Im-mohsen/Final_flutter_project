@@ -7,6 +7,7 @@ import 'pages/profile.dart';
 import 'pages/aboutus.dart';
 import 'pages/contactus.dart';
 import 'login.dart';
+import 'pages/categories.dart';
 
 void main() {
   runApp(const MyApp());
@@ -304,6 +305,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('ورود', textDirection: TextDirection.rtl),
                 ),
               ),
+              const PopupMenuItem<String>(
+                value: 'categories',
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('دسته بندی', textDirection: TextDirection.rtl),
+                ),
+              ),
             ],
           );
 
@@ -321,6 +329,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutusPage()));
           } else if (selected == 'login') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
+          } else if (selected == 'categories') {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const CategoriesPage()));
           }
 
         },
