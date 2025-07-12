@@ -258,6 +258,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             items: [
               const PopupMenuItem<String>(
+                value: 'categories',
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('دسته بندی', textDirection: TextDirection.rtl),
+                ),
+              ),
+              const PopupMenuItem<String>(
                 value: 'cart',
                 child: Align(
                   alignment: Alignment.centerRight,
@@ -265,10 +272,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               const PopupMenuItem<String>(
-                value: 'admin',
+                value: 'login',
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Text('پنل ادمین', textDirection: TextDirection.rtl),
+                  child: Text('ورود', textDirection: TextDirection.rtl),
                 ),
               ),
               const PopupMenuItem<String>(
@@ -276,6 +283,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text('پروفایل', textDirection: TextDirection.rtl),
+                ),
+              ),
+              const PopupMenuItem<String>(
+                value: 'admin',
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('پنل ادمین', textDirection: TextDirection.rtl),
                 ),
               ),
               const PopupMenuItem<String>(
@@ -290,20 +304,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text('درباره ما', textDirection: TextDirection.rtl),
-                ),
-              ),
-              const PopupMenuItem<String>(
-                value: 'login',
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text('ورود', textDirection: TextDirection.rtl),
-                ),
-              ),
-              const PopupMenuItem<String>(
-                value: 'categories',
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text('دسته بندی', textDirection: TextDirection.rtl),
                 ),
               ),
             ],
