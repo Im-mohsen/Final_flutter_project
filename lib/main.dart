@@ -286,13 +286,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               const PopupMenuItem<String>(
-                value: 'admin',
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text('پنل ادمین', textDirection: TextDirection.rtl),
-                ),
-              ),
-              const PopupMenuItem<String>(
                 value: 'contactus',
                 child: Align(
                   alignment: Alignment.centerRight,
@@ -311,11 +304,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
           if (selected == 'cart') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const CartPage()));
-          } else if (selected == 'admin') {
-            Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminPage()));
-          }else if (selected == 'profile') {
+          } else if (selected == 'profile') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfilePage()));
-          }else if (selected == 'contactus') {
+          } else if (selected == 'contactus') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const ContactusPage()));
           } else if (selected == 'aboutus') {
             Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutusPage()));

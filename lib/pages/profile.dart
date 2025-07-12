@@ -17,7 +17,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text(
-              'محسن دارابی',
+              'رضا احمدی',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 30),
