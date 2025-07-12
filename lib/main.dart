@@ -240,6 +240,86 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 180,
+                child: PageView(
+                  children: [
+                    _buildBanner('../assets/images/banner1.png'),
+                    _buildBanner('../assets/images/banner2.png'),
+                    _buildBanner('../assets/images/banner3.png'),
+                    _buildBanner('../assets/images/banner4.png'),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _quickAccessButton(Icons.shopping_bag, 'محصولات', () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const CategoriesPage()));
+                  }),
+                  _quickAccessButton(Icons.person, 'پروفایل', () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfilePage()));
+                  }),
+                  _quickAccessButton(Icons.support_agent, 'پشتیبانی', () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const ContactusPage()));
+                  }),
+                  _quickAccessButton(Icons.login, 'ورود', () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
+                  }),
+                ],
+              ),
+
+              const SizedBox(height: 32),
+
+              const Text(
+                '🔥 محصولات ویژه',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                height: 220,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    _buildProductCard('گوشی A52', '../assets/images/a52.jpg', 12500000),
+                    _buildProductCard('PS5', '../assets/images/Ps5.jpg', 25000000),
+                    _buildProductCard('لپ‌تاپ lenovo', '../assets/images/lenovo.png', 38500000),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              const Text(
+                '🏆 پرفروش‌ترین‌ها',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                height: 220,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    _buildProductCard('کارت حافظه 64GB', '../assets/images/memory.jpg', 350000),
+                    _buildProductCard('مودم TD-LTE', '../assets/images/tdelte.jpg', 720000),
+                    _buildProductCard('مانیتور 24 اینچ', '../assets/images/monitor.jpg', 5800000),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 32),
+            ],
+          ),
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         key: _fabKey,
         backgroundColor: const Color.fromARGB(255, 244, 3, 99),
@@ -320,6 +400,78 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'منو',
         child: const Icon(Icons.menu),
       ),
+    );
+  }
+  Widget _buildBanner(String imagePath) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Image.asset(
+        imagePath,
+        fit: BoxFit.cover,
+        width: double.infinity,
+      ),
+    );
+  }
+
+  Widget _buildProductCard(String title, String imagePath, int price) {
+    return Container(
+      width: 160,
+      margin: const EdgeInsets.only(right: 12),
+      child: Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+              ),
+              child: Image.asset(
+                imagePath,
+                height: 150,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 6, 8, 2),
+              child: Text(
+                title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 6),
+              child: Text(
+                '$price تومان',
+                style: const TextStyle(color: Colors.green),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _quickAccessButton(IconData icon, String label, VoidCallback onTap) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: onTap,
+          child: CircleAvatar(
+            radius: 26,
+            backgroundColor: const Color.fromARGB(255, 244, 3, 99),
+            child: Icon(icon, color: Colors.white),
+          ),
+        ),
+        const SizedBox(height: 6),
+        Text(label, style: const TextStyle(fontSize: 14)),
+      ],
     );
   }
 }
